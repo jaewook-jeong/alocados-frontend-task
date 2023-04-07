@@ -5,5 +5,6 @@ import { ReactComponent as Ethereum } from './Ethereum.svg';
 import { ReactComponent as Right } from './Right.svg';
 import { ReactComponent as Solana } from './Solana.svg';
 import { ReactComponent as Swap } from './Swap.svg';
+import { ReactComponent as ArrowDown } from './ArrowDown.svg';
 
-export default { Alocados, Bnb, Down, Ethereum, Right, Solana, Swap };
+export default { Alocados, Bnb, Down, Ethereum, Right, Solana, Swap, ArrowDown };

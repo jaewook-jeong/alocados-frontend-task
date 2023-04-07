@@ -7,10 +7,12 @@ const Wrapper = styled.div`
   row-gap: 24px;
 `;
 
-const Title = styled.div`
+const Title = styled.h1`
   ${text22Bold};
   font-family: 'Pretendard';
   color: var(--light-shade-900);
+  margin: 0;
+  margin-top: 120px;
 `;
 
 const InfoWrapper = styled.div`

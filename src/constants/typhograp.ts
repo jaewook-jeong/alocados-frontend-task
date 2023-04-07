@@ -53,3 +53,10 @@ export const text18 = css`
   font-size: 18px;
   line-height: 178%;
 `;
+
+export const text14Bold = css`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 178%;
+`;

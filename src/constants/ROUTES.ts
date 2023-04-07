@@ -1,6 +1,6 @@
 const ROUTES = {
   EXCHANGE: '/',
-  TRANSACTION_HISTORY: '/transaction-history',
+  EXCHANGE_HISTORY: '/exchange-history',
 };
 
 export default ROUTES;

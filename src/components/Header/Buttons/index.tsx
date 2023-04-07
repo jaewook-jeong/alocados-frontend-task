@@ -7,7 +7,7 @@ type Props = {
 
 const ButtonsRoutes = {
   [ROUTES.EXCHANGE]: '환전하기',
-  [ROUTES.TRANSACTION_HISTORY]: '거래내역',
+  [ROUTES.EXCHANGE_HISTORY]: '거래내역',
 };
 
 const Buttons = ({ currentPath }: Props) => {

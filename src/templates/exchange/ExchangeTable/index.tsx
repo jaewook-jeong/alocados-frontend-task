@@ -3,6 +3,7 @@ import Icons from '@assets/svg';
 import Input from '@comp/Input';
 import * as Styled from './ExchangeTable.styled';
 import Dropdown from '@comp/Dropdown';
+import ExchangeHistory from '@comp/ExchangeHistory';
 
 const ExchangeTable = () => {
   const [value, setValue] = useState('1');
@@ -21,20 +22,7 @@ const ExchangeTable = () => {
         </Styled.Row>
       </Styled.Table>
       <Styled.ExchangeButton>환전</Styled.ExchangeButton>
-      <Styled.LatestHistory>
-        <Styled.Time>2023-03-12, AM 10:50</Styled.Time>
-        <Styled.AmountWrapper>
-          <Styled.CrypAmount>
-            <Icons.Ethereum />
-            1,302.44 ETH
-          </Styled.CrypAmount>
-          <Icons.Right />
-          <Styled.CrypAmount>
-            <Icons.Solana />
-            1,302.44 SOL
-          </Styled.CrypAmount>
-        </Styled.AmountWrapper>
-      </Styled.LatestHistory>
+      <ExchangeHistory />
     </Styled.Wrapper>
   );
 };
