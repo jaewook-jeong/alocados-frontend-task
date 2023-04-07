@@ -1,9 +1,7 @@
 import { text14, text14Bold, text22Bold } from "constants/typhograp";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
-
-`;
+const Wrapper = styled.div``;
 
 const Title = styled.h1`
   margin: 0;
@@ -24,6 +22,9 @@ const TableHeader = styled.div`
 `;
 
 const HeaderTime = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   font-family: 'Poppins';
   ${text14Bold};
   color: var(--light-shade-900);
