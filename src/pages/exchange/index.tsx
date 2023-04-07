@@ -1,5 +1,12 @@
+import Header from '@comp/Header';
+
 const Exchange = () => {
-  return <div>Exchange</div>;
+  return (
+    <div>
+      <Header />
+      Exchange
+    </div>
+  );
 };
 
 export default Exchange;

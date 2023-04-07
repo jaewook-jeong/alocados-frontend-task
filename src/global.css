@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "Pretendard";
+  src: url("./assets/fonts/PretendardVariable.ttf");
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/fonts/Poppins-Medium.ttf");
+}
+
+:root {
+  --gnb-height: 120px;
+}
+
+:root {
+  --light-primary-12:#5D28F21F;
+  --light-primary-font: #5D28F2;
+  --light-shade-700: #404E71;
+}
