@@ -7,7 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={ROUTES.Exchange} element={<Exchange />} />
+        <Route path={ROUTES.EXCHANGE} element={<Exchange />} />
         <Route path={ROUTES.TRANSACTION_HISTORY} element={<TransactionHistory />} />
       </Routes>
     </BrowserRouter>

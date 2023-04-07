@@ -1,5 +1,5 @@
 const ROUTES = {
-  Exchange: '/exchange',
+  EXCHANGE: '/',
   TRANSACTION_HISTORY: '/transaction-history',
 };
 
