@@ -4,9 +4,12 @@ import Input from '@comp/Input';
 import * as Styled from './ExchangeTable.styled';
 import Dropdown from '@comp/Dropdown';
 import ExchangeHistory from '@comp/ExchangeHistory';
+import useExchangeStore from 'store/useExchangeStore';
 
 const ExchangeTable = () => {
   const [value, setValue] = useState('1');
+  const latestHistory = useExchangeStore((state) => state.history[state.history.length - 1]);
+  const wallet = useExchangeStore((state) => state.wallet);
 
   return (
     <Styled.Wrapper>
@@ -22,7 +25,7 @@ const ExchangeTable = () => {
         </Styled.Row>
       </Styled.Table>
       <Styled.ExchangeButton>환전</Styled.ExchangeButton>
-      <ExchangeHistory />
+      <ExchangeHistory data={latestHistory} />
     </Styled.Wrapper>
   );
 };

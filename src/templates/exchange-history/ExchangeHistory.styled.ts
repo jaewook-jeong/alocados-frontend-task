@@ -19,6 +19,7 @@ const TableHeader = styled.div`
   padding: 8px 16px;
   background: var(--light-shade-100);
   border-radius: 12px;
+  margin-bottom: 8px;
 `;
 
 const HeaderTime = styled.div`
@@ -36,10 +37,17 @@ const HeaderAmount = styled.div`
   color: var(--light-shade-900);
 `;
 
+const ListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+`;
+
 export {
   Wrapper,
   Title,
   TableHeader,
   HeaderAmount,
   HeaderTime,
+  ListWrapper,
 }

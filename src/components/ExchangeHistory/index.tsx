@@ -1,19 +1,24 @@
 import Icons from '@assets/svg';
 import * as Styled from './ExchangeHistory.styled';
+import { ExchangeHistory as ExchangeHistoryProps } from 'types/crypto';
+import { CRYPTO_DETAIL } from 'constants/crypto';
 
-const ExchangeHistory = () => {
+const ExchangeHistory = ({ data }: { data: ExchangeHistoryProps }) => {
+  const fromInfo = CRYPTO_DETAIL[data.fromId];
+  const toInfo = CRYPTO_DETAIL[data.toId];
+
   return (
     <Styled.LatestHistory>
-      <Styled.Time>2023-03-12, AM 10:50</Styled.Time>
+      <Styled.Time>{data.time}</Styled.Time>
       <Styled.AmountWrapper>
         <Styled.CrypAmount>
-          <Icons.Ethereum />
-          1,302.44 ETH
+          <fromInfo.Icon />
+          {`${data.amount} ${fromInfo.currencySymbol}`}
         </Styled.CrypAmount>
         <Icons.Right />
         <Styled.CrypAmount>
-          <Icons.Solana />
-          1,302.44 SOL
+          <toInfo.Icon />
+          {`${data.amount * data.rate} ${toInfo.currencySymbol}`}
         </Styled.CrypAmount>
       </Styled.AmountWrapper>
     </Styled.LatestHistory>

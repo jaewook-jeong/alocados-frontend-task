@@ -4,6 +4,7 @@ import styled from "styled-components";
 const LatestHistory = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   column-gap: 32px;
   padding: 8px 16px;
