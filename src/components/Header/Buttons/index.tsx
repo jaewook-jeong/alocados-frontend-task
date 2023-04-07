@@ -15,7 +15,7 @@ const Buttons = ({ currentPath }: Props) => {
     <>
       {Object.entries(ButtonsRoutes).map(([key, name]) => {
         return (
-          <StyledLink $active={key === currentPath} to={key}>
+          <StyledLink $active={key === currentPath} to={key} key={key}>
             {name}
           </StyledLink>
         );

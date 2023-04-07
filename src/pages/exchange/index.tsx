@@ -1,12 +1,13 @@
 import Header from '@comp/Header';
+import Exchange from 'templates/exchange';
 
-const Exchange = () => {
+const ExchangePage = () => {
   return (
     <div>
       <Header />
-      Exchange
+      <Exchange />
     </div>
   );
 };
 
-export default Exchange;
+export default ExchangePage;

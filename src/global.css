@@ -15,5 +15,13 @@
 :root {
   --light-primary-12:#5D28F21F;
   --light-primary-font: #5D28F2;
+  --light-primary-100: #5D28F2;
+  --light-shade-opacity-5: #2A32490D;
+  --light-shade-000: #FAFBFC;
+  --light-shade-100: #F4F5F8;
+  --light-shade-300: #C8CCD7;
+  --light-shade-600: #516182;
   --light-shade-700: #404E71;
+  --light-shade-800: #313C57;
+  --light-shade-900: #2A3249;
 }

@@ -4,6 +4,7 @@ import styled, {  css } from 'styled-components';
 
 const StyledLink = styled(Link)<{ $active: boolean }>`
   text-decoration: none;
+  font-family: 'Pretendard';
   ${text15};
   width: 90px;
   height: 56px;
