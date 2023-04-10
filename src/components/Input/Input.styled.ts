@@ -1,13 +1,14 @@
 import { text12SemiBold, text18SemiBold } from "constants/typhograp";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{$isError?: boolean}>`
   width: 100%;
   border-radius: 12px;
   overflow: hidden;
   padding-top: 4px;
   padding-left: 14px;
   background-color: var(--light-shade-000);
+  border: ${(props) => props.$isError && `1px solid var(--light-error-100)`};
 `;
 
 const Label = styled.label`

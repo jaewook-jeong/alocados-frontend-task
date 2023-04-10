@@ -19,9 +19,21 @@ const DropdownButton = styled.button`
   padding: 16px 10px;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   column-gap: 4px;
   width: 100%;
   cursor: pointer;
+  font-family: 'Poppins';
+  color: var(--light-shade-900);
+  ${text14};
+
+  & > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 4px;
+  }
 `;
 
 const DropdownList = styled.div`

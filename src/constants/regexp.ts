@@ -1,0 +1,1 @@
+export const decimalRegExp = /^\d*(\.\d{0,10})?$/;

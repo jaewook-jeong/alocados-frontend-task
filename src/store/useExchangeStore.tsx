@@ -1,4 +1,7 @@
+import RATE from 'constants/Rate';
+import dayjs from 'dayjs';
 import { ExchangeHistory, Wallet } from 'types/crypto';
+import generateRandomString from 'utils/generateRandomString';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
@@ -6,7 +9,7 @@ export type ExchangeStore = {
   history: ExchangeHistory[];
   wallet: Wallet;
   actions: {
-    exchange: (data: ExchangeHistory) => void;
+    exchange: (data: Pick<ExchangeHistory, 'fromId' | 'toId' | 'amount'>) => void;
   };
 };
 
@@ -22,28 +25,37 @@ const useExchangeStore = create(
         rate: 100,
       },
     ],
-    wallet: [
-      {
-        id: 'Ethereum',
+    wallet: {
+      Ethereum: {
         amount: 1995,
       },
-      {
-        id: 'Solana',
+      Solana: {
         amount: 500,
       },
-      {
-        id: 'BnB',
+      BnB: {
         amount: 0,
       },
-    ],
+    },
     actions: {
       exchange: (data) => {
         if (data.fromId === data.toId) {
           throw new Error('같은 코인끼리 환전할 수 없습니다.');
         }
-        const { history } = getState();
+        const { fromId, amount, toId } = data;
+
+        const id = generateRandomString(5);
+        const rate = RATE[fromId][toId];
+        const time = dayjs().format('YYYY-MM-DD, A HH:mm');
+
+        const { history, wallet } = getState();
+        const nextWallet = {
+          [fromId]: { amount: wallet[fromId].amount - amount },
+          [toId]: { amount: wallet[toId].amount + amount * rate },
+        };
+
         setState({
-          history: [...history, { ...data }],
+          history: [...history, { ...data, id, rate, time }],
+          wallet: { ...wallet, ...nextWallet },
         });
       },
     },

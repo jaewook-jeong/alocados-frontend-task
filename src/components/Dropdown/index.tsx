@@ -1,33 +1,22 @@
-import { useCallback, useRef, useState } from 'react';
+import { FunctionComponent, useCallback, useRef, useState } from 'react';
 import Icons from '@assets/svg';
 import * as Styled from './Dropdown.styled';
+import useClickOutside from 'hooks/useClickOutside';
 
-type Props = {};
-
-const TEMP_LIST = [
-  {
-    id: 'Solana',
-    name: 'Solana',
-    Icon: Icons.Solana,
-    disabled: true,
-  },
-  {
-    id: 'Ethereum',
-    name: 'Ethereum',
-    Icon: Icons.Ethereum,
-    disabled: false,
-  },
-  {
-    id: 'BnB',
-    name: 'BnB',
-    Icon: Icons.Bnb,
-    disabled: false,
-  },
-];
-
-const Dropdown = ({}) => {
+const Dropdown = <IdType extends string>({
+  list,
+  keyName,
+  placeholder,
+  onChange,
+  selectedId,
+}: {
+  keyName: string;
+  placeholder: string;
+  list: { id: IdType; name: string; disabled: boolean; Icon: FunctionComponent }[];
+  onChange: (id: IdType) => void;
+  selectedId?: IdType;
+}) => {
   const [isListOpen, setListOpen] = useState(false);
-  const [selectedId, setSelectedId] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleClick = useCallback((e: MouseEvent) => {
@@ -40,20 +29,32 @@ const Dropdown = ({}) => {
     setListOpen(!isListOpen);
   };
 
+  const selectedItem = list.find((item) => item.id === selectedId);
+  useClickOutside<HTMLDivElement>(dropdownRef, () => setListOpen(false));
+
   return (
     <Styled.Wrapper ref={dropdownRef} onClick={toggleList}>
       <Styled.DropdownButton>
+        {selectedItem ? (
+          <div>
+            <selectedItem.Icon />
+            {selectedItem.name}
+          </div>
+        ) : (
+          placeholder
+        )}
         <Icons.Down />
       </Styled.DropdownButton>
       {isListOpen && (
         <Styled.DropdownList>
-          {TEMP_LIST.map(({ Icon, disabled, name, id }) => {
+          {list.map(({ Icon, disabled, name, id }) => {
             return (
               <Styled.DropdownChildren
+                key={`${keyName}_${id}`}
                 $disabled={disabled}
                 onClick={(e) => {
                   if (!disabled) {
-                    setSelectedId(id);
+                    onChange(id);
                   } else {
                     e.stopPropagation();
                   }

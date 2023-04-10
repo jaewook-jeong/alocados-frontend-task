@@ -2,12 +2,13 @@ import { useCallback, useEffect, useState } from 'react';
 import * as Styled from './Input.styled';
 
 type Props = {
-  value: string;
+  value: string | number;
   onChange: (value: string) => void;
   label?: string;
+  error?: boolean;
 };
 
-const Input = ({ value, onChange, label = '전환 수량' }: Props) => {
+const Input = ({ value, onChange, label = '전환 수량', error }: Props) => {
   const [inputNode, setNode] = useState<HTMLDivElement>();
 
   const callbackRef = useCallback((node: HTMLDivElement) => {
@@ -31,7 +32,7 @@ const Input = ({ value, onChange, label = '전환 수량' }: Props) => {
   }, [inputNode]);
 
   return (
-    <Styled.Wrapper ref={callbackRef}>
+    <Styled.Wrapper ref={callbackRef} $isError={error}>
       <Styled.Label>{label}</Styled.Label>
       <Styled.Input value={value} onChange={(e) => onChange(e.target.value)} />
     </Styled.Wrapper>

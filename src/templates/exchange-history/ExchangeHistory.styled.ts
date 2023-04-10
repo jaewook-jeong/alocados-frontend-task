@@ -22,13 +22,19 @@ const TableHeader = styled.div`
   margin-bottom: 8px;
 `;
 
-const HeaderTime = styled.div`
+const HeaderTime = styled.button<{$rotate: boolean}>`
   display: flex;
   flex-direction: row;
   align-items: center;
+  border: none;
+  background-color: transparent;
   font-family: 'Poppins';
   ${text14Bold};
   color: var(--light-shade-900);
+  cursor: pointer;
+  & > svg {
+    transform: ${(props) => props.$rotate ? `rotate(180deg)` : ''};
+  }
 `;
 
 const HeaderAmount = styled.div`

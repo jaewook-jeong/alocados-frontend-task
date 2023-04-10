@@ -1,5 +1,5 @@
 import { text15SemiBold, text18SemiBold } from "constants/typhograp";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
@@ -23,7 +23,7 @@ const Row = styled.div`
   height: 56px;
 `;
 
-const ExchangeButton = styled.button`
+const ExchangeButton = styled.button<{$disabled: boolean}>`
   height: 56px;
   padding: 10px 16px;
   background-color: var(--light-primary-100);
@@ -34,6 +34,11 @@ const ExchangeButton = styled.button`
   font-family: 'Pretendard';
   ${text15SemiBold};
   cursor: pointer;
+  ${(props) => props.$disabled && css`
+    background-color: var(--light-shade-200);
+    color: var(--light-shade-400);
+    cursor: not-allowed;
+  `}
 `;
 
 const TargetAmount = styled.div`

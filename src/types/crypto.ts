@@ -13,9 +13,9 @@ export type Amount = {
   amount: number;
 };
 
-export type Wallet = ({
-  id: CryptoType;
-} & Amount)[];
+export type Wallet = {
+  [K in CryptoType]: Amount;
+};
 
 export type ExchangeHistory = {
   id: string;
