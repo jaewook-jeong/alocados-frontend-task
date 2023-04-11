@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { MouseEvent, useMemo, useState } from 'react';
 import Icons from '@assets/svg';
 import Input from '@comp/Input';
 import * as Styled from './ExchangeTable.styled';
@@ -14,6 +14,7 @@ const ExchangeTable = () => {
   const [amount, setAmount] = useState<string>('1');
   const [fromId, setFromId] = useState<CryptoType>();
   const [toId, setToId] = useState<CryptoType>();
+
   const latestHistory = useExchangeStore((state) => state.history[state.history.length - 1]);
   const wallet = useExchangeStore((state) => state.wallet);
   const toChangeableCoinList = useExchangeStore((state) =>
@@ -25,29 +26,45 @@ const ExchangeTable = () => {
     })),
   );
   const { exchange } = useExchangeActions();
+
+  const onExchange = (e: MouseEvent<HTMLButtonElement>) => {
+    if (disabled) {
+      e.stopPropagation();
+    } else {
+      exchange({
+        fromId,
+        toId,
+        amount: parseFloat(amount),
+      });
+      setFromId(undefined);
+      setToId(undefined);
+      setAmount('1');
+    }
+  };
+  const onValidateChange = (value: string) => {
+    if (isNaN(value as any)) {
+      return;
+    }
+    if (decimalRegExp.test(value)) {
+      setAmount(value);
+    }
+  };
   const toBeExchangedCoinList = useMemo(
     () => Object.values(CRYPTO_DETAIL).map((coin) => ({ ...coin, disabled: coin.id === fromId })),
     [fromId],
   );
   const error = !amount || amount === '0' || (fromId && parseFloat(amount) > wallet[fromId].amount);
   const disabled = error || !fromId || !toId;
+  const calculateAmount = useMemo(() => {
+    if (!disabled) return parseFloat((parseFloat(amount) * RATE[fromId][toId]).toFixed(10));
+    return '';
+  }, [disabled, amount]);
+
   return (
     <Styled.Wrapper>
       <Styled.Table>
         <Styled.Row>
-          <Input
-            label="전환 수량"
-            value={amount}
-            onChange={(value) => {
-              if (isNaN(value as any)) {
-                return;
-              }
-              if (decimalRegExp.test(value)) {
-                setAmount(value);
-              }
-            }}
-            error={error}
-          />
+          <Input label="전환 수량" value={amount} onChange={onValidateChange} error={error} />
           <Dropdown<CryptoType>
             onChange={(id) => setFromId(id)}
             selectedId={fromId}
@@ -58,9 +75,7 @@ const ExchangeTable = () => {
         </Styled.Row>
         <Icons.Swap />
         <Styled.Row>
-          <Styled.TargetAmount>
-            {!disabled && parseFloat((parseFloat(amount) * RATE[fromId][toId]).toFixed(10))}
-          </Styled.TargetAmount>
+          <Styled.TargetAmount>{calculateAmount}</Styled.TargetAmount>
           <Dropdown
             onChange={(id) => setToId(id)}
             selectedId={toId}
@@ -70,23 +85,7 @@ const ExchangeTable = () => {
           />
         </Styled.Row>
       </Styled.Table>
-      <Styled.ExchangeButton
-        $disabled={disabled}
-        onClick={(e) => {
-          if (disabled) {
-            e.stopPropagation();
-          } else {
-            exchange({
-              fromId,
-              toId,
-              amount: parseFloat(amount),
-            });
-            setFromId(undefined);
-            setToId(undefined);
-            setAmount('1');
-          }
-        }}
-      >
+      <Styled.ExchangeButton $disabled={disabled} onClick={onExchange}>
         환전
       </Styled.ExchangeButton>
       <ExchangeHistory data={latestHistory} />
